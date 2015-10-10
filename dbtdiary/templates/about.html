@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1', {'packages':['annotatedtimeline']});
+    google.setOnLoadCallback(drawTimeline);
+    function drawTimeline() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('date', 'Date');
+        data.addColumn('number', 'Number of Diaries');
+        data.addRows([
+            {% for date, count in diaries_per_day.items %}
+          [new Date({{date.year}}, {{date.month}} - 1, {{date.day}}), {{count}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('diary-timeline'));
+        chart.draw(data, {displayAnnotations: false,
+            displayZoomButtons: false, 
+            displayRangeSelector: true, 
+            backgroundColor: { fill: 'none'}});
+    }
+</script>
+
+
+{% endblock %}
+
+{% block content %}
+    <h2 class="heading">About DBT Diary</h2>
+    
+    <div class="row">
+
+	<div class="span8">
+    	<div class="well">
+        <p>DBT Diary is an online diary card meant for use in Dialectical Behavioral Therapy. Diary cards are done to track mood, urges, and actions, and previously were done on paper. This site aims to make these diaries digital, and therefore easier to access and manage. </p>
+
+        <p>This is only one format of a diary card, there are many different versions available. I believe this site offers the easiest diary card to fill out, as it is a simple web form. It also allows for some interesting analysis available in the form of tables and charts. This allows for easier tracking of urges and mood over time.</p>
+
+        <p>Any questions or comments about this site can be directed to <a href="mailto:marie@violetco.de">marie@violetco.de</a>.</p>
+    	</div>
+    </div>
+    
+    <div class="span4">
+    	<a id="support-dbtdiary"></a>
+    	<h3>Support DBT Diary</h3>
+    	<p>Your financial support will help to keep DBT Diary up and running.</p>
+    	    	  
+    	  <form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/552401742905904" id="support_form" method="post">
+    	    	
+    	    	<div class="input-prepend">
+    	    	<span class="add-on">$</span>
+    	    	<input name="item_price_1" type="text" value="5.00"/>
+    	   		</div>	
+    	   		
+    	    <input name="item_name_1" type="hidden" value="Support DBT Diary"/>
+    	    <input name="item_description_1" type="hidden" value="Your financial support will help to keep DBT Diary up and running."/>
+    	    <input name="item_quantity_1" type="hidden" value="1"/>
+    	    <input name="item_currency_1" type="hidden" value="USD"/>
+    	    <input name="_charset_" type="hidden" value="utf-8"/>
+    	    <input alt="" src="https://checkout.google.com/buttons/support.gif?merchant_id=552401742905904&w=130&h=50&style=trans&variant=text" type="image"/>
+    	  </form> 
+    	   
+    </div>
+    
+    </div><!-- .row -->
+    <div class="row">
+        <div class="span8">
+            <h2 class="heading">Statistics</h2>
+            <div class="well">
+                <p><strong>Total users:</strong> {{user_count}}</p>
+                <p><strong>Active users:</strong> {{active_users}}</p>
+                <p><strong>Total diaries:</strong> {{diary_count}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h3 class="heading visible-desktop">Diaries per Day</h3>
+        <div id="diary-timeline" class="visible-desktop" style='width: 900px; height: 300px;'></div>
+    </div>
+{% endblock %}

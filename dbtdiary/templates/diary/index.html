@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+	
+	<h2 class="heading">Welcome, {{user.username}}.</h2>
+    
+    <div class="row">
+    
+    <div class="span5">
+    <div class="well">	
+    	<h3 class="heading">What would you like to do?</h3>
+      <a class="btn btn-large btn-block btn-inverse" href="/submit/">Record a new diary</a>
+      <a class="btn btn-large btn-block btn-inverse" href="/summary/" >View past week's diary statistics</a>
+      <a class="btn btn-large btn-block btn-inverse" href="/summary/month/" >View past month's diary statistics</a>
+      <a class="btn btn-large btn-block btn-inverse" href="/summary/year/" >View past year's diary statistics</a>
+      <a class="btn btn-large btn-block btn-inverse" href="/browse/" >Browse previous diaries</a>
+    </div>
+    </div>
+    
+    <div class="span7">
+    <div class="well">
+    <h3 class="heading">Recent Diaries</h3>
+   	<table class="table table-hover">
+   		<thead>
+        <tr>
+          <th>Weekday</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+   	{% for diary in diaries %}
+   	    <tr>
+   	    	<td><a href="/diary/{{diary.id}}">{{diary.time|date:"l"}}</a></td>
+   	    	<td><a href="/diary/{{diary.id}}">{{diary.time|date:"F jS, Y"}}</a></td>
+   	    	<td><a href="/diary/{{diary.id}}">{{diary.time|date:"g:i a"}}</a></td>
+          <td><a href="/edit/{{diary.id}}"><i class="icon-edit"></i></a></td>
+          <td><a href="/delete/{{diary.id}}"><i class="icon-trash"></i></a></td>
+   	    </tr>
+   	{% empty %}
+   	    <tr>No previous diaries. You should <a href="/submit">fill one out</a>?</tr>
+   	{% endfor %}
+   	</tbody>
+   	</table>
+   	</div> 
+    </div>
+    
+	</div><!-- .row -->
+	
+	{% endif %}
+{% endblock %}

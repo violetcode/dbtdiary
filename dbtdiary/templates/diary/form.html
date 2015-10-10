@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="" method="post">{% csrf_token %}
+
+{% if form.non_field_errors %}
+<div class="alert alert-error">{{form.non_field_errors}}</div>
+{% endif %}
+
+{% if adding %}
+<h2 class="heading">New Diary</h2>
+{% else %}
+<h2 class="heading">Edit Diary</h2>
+{% endif %}
+
+<div class="row">
+	<div class="span4">
+		<div class="well">
+		<div class="fieldWrapper" id="used_skills">
+			<h3 class="heading">Used Skills</h3>
+			{% for field in form.used_skills %}
+				{{ field }}
+			{% endfor %}
+			
+			{% if form.used_skills.errors %}	
+		    <div class="alert alert-error">{{form.used_skills.errors}}</div>
+		    {% endif %}
+		</div>
+		
+		<div class="fieldWrapper" id="skillsWrapper">
+			{% if form.skills.errors %}
+		    <div class="alert alert-error">{{form.skills.errors}}</div>
+		    {% endif %}
+		    <label>Skills:</label>
+		    {{form.skills}}
+		</div>
+		</div>
+		
+		<div class="well" id="actions">
+			<h3 class="heading">Actions</h3>
+			<div class="fieldWrapper">
+			{% if form.action_sh.errors %}
+		    <div class="alert alert-error">{{form.action_sh.errors}}</div>
+		   	{% endif %}
+		    
+		    <label class="checkbox inline">
+	      	<!--<input type="checkbox" id="inlineCheckbox1" name="action_sh"> Self Harm<br>(check for yes)-->
+	      		{{form.action_sh}}Self Harm<br>(check for yes)
+		    </label>
+		   	    
+			</div>
+		
+			<div class="fieldWrapper" id="lyingWrapper">
+			{% if form.lying.errors %}
+		    <div class="alert alert-error">{{form.lying.errors}}</div>
+		    {% endif %}
+		    <label>Lying (# of times):</label>
+		    {{form.lying}}
+			</div>
+		</div>
+				
+	</div><!-- span4 -->
+	
+	<div class="span8">
+		<div class="well" id="urges">
+		<h3 class="heading">Urges</h3>
+		<div class="fieldWrapper">
+			<label class="heading">Key:</label>
+			<p>0 = None, 5 = High</p>
+		</div>
+		<div class="fieldWrapper">
+			{% if form.urge_suicide.errors %}
+		    <div class="alert alert-error">{{form.urge_suicide.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Suicide:</label>		    		    		    
+		    {% for radio in form.urge_suicide %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}    
+		</div>
+		
+		<div class="fieldWrapper">
+			{% if form.urge_sh.errors %}
+		    <div class="alert alert-error">{{form.urge_sh.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Self Harm:</label>		    
+		    {% for radio in form.urge_sh %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}    
+		</div>
+		
+		</div><!-- urges -->
+		
+		<div class="well" id="emotions">
+			<h3 class="heading">Emotions</h3>
+			<div class="fieldWrapper">
+				<label class="heading">Key:</label>
+				<p>0 = None, 5 = High</p>
+			</div>
+			<div class="fieldWrapper">
+			{% if form.pain.errors %}
+		    <div class="alert alert-error">{{form.pain.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Pain:</label>
+		    {% for radio in form.pain %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.sad.errors %}
+		    <div class="alert alert-error">{{form.sad.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Sadness:</label>
+		    {% for radio in form.sad %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.shame.errors %}
+		    <div class="alert alert-error">{{form.shame.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Shame:</label>
+		    {% for radio in form.shame %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.anger.errors %}
+		    <div class="alert alert-error">{{form.anger.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Anger:</label>
+		    {% for radio in form.anger %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.fear.errors %}
+		    <div class="alert alert-error">{{form.fear.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Fear:</label>
+		    {% for radio in form.fear %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.disgust.errors %}
+		    <div class="alert alert-error">{{form.disgust.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Disgust:</label>
+		    {% for radio in form.disgust %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.jealousy.errors %}
+		    <div class="alert alert-error">{{form.jealousy.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Jealousy:</label>
+		    {% for radio in form.jealousy %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.guilt.errors %}
+		    <div class="alert alert-error">{{form.guilt.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Guilt:</label>
+		    {% for radio in form.guilt %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.agitation.errors %}
+		    <div class="alert alert-error">{{form.agitation.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Agitation:</label>
+		    {% for radio in form.agitation %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+			<div class="fieldWrapper">
+			{% if form.joy.errors %}
+		    <div class="alert alert-error">{{form.joy.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Joy:</label>
+		    {% for radio in form.joy %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		<div class="fieldWrapper">
+			{% if form.happy.errors %}
+		    <div class="alert alert-error">{{form.happy.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Happiness:</label>
+		    {% for radio in form.happy %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		<div class="fieldWrapper">
+			{% if form.content.errors %}
+		    <div class="alert alert-error">{{form.content.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Contentment:</label>
+		    {% for radio in form.content %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		<div class="fieldWrapper">
+			{% if form.calm.errors %}
+		    <div class="alert alert-error">{{form.calm.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Calm:</label>
+		    {% for radio in form.calm %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		<div class="fieldWrapper">
+			{% if form.grateful.errors %}
+		    <div class="alert alert-error">{{form.grateful.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Grateful:</label>
+		    {% for radio in form.grateful %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		<div class="fieldWrapper">
+			{% if form.excitement.errors %}
+		    <div class="alert alert-error">{{form.exitement.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Excitement:</label>
+		    {% for radio in form.excitement %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		<div class="fieldWrapper">
+			{% if form.optimism.errors %}
+		    <div class="alert alert-error">{{form.optimism.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Optimism:</label>
+		    {% for radio in form.optimism %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		<div class="fieldWrapper">
+			{% if form.hope.errors %}
+		    <div class="alert alert-error">{{form.hope.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Hope:</label>
+		    {% for radio in form.hope %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		<div class="fieldWrapper">
+			{% if form.confidence.errors %}
+		    <div class="alert alert-error">{{form.confidence.errors}}</div>
+		    {% endif %}
+		    <label class="heading">Confidence:</label>
+		    {% for radio in form.confidence %}
+		    <label class="radio inline">{{ radio }}</label>
+		    {% endfor %}
+		</div>
+		</div><!-- emotions -->	
+	
+		<div class="well" id="notes">
+	    	<h3 class="heading">Notes</h3>
+	    	<div class="fieldWrapper">
+	    	{% if form.notes.errors %}
+	    	<div class="alert alert-error">{{form.notes.errors}}</div>
+	    	{% endif %}
+	        {{form.notes}}
+	    	</div>
+		</div><!-- notes -->
+		
+		<input type="submit" value="Submit" class="btn" />
+		
+	</div><!-- span4 -->
+	
+		
+	
+</div>
+
+</form>
+{% endblock %}

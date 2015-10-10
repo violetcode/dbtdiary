@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="heading">Contact Us</h2>
+    
+    <div class="row">
+    	<div class="span8">
+    	<div class="well">
+        <form action="/contact/" method="post">{% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="fieldWrapper">
+                {{ form.subject.errors }}
+                <label for="id_subject">Subject:</label>
+                {{ form.subject }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.sender.errors }}
+                <label for="id_sender">Your email address:</label>
+                {{ form.sender }}
+            </div>
+            
+            <div class="fieldWrapper">
+                {{ form.message.errors }}
+                <label for="id_message">Your message:</label>
+                {{ form.message }}
+            </div>
+            
+            <div class="fieldWrapper" id="ccWrapper">
+                {{ form.cc_myself.errors }}
+                <label for="id_cc_myself">Send a copy to yourself?
+                {{ form.cc_myself }}</label>
+                <div class="clearfix"></div>
+            </div>
+            <p><input type="submit" class="btn btn-inverse" value="Send message" /></p>
+        </form>
+        </div>
+        </div>
+    </div>
+{% endblock %}

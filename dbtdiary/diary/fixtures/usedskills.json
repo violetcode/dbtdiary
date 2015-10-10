@@ -1,0 +1,191 @@
+[
+  {
+    "pk": 1, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Wise Mind"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Observe"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Describe"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Participate"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Nonjudgemental"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "One-mindfully"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Effectiveness"
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Objective Effectiveness"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Relationship Effectiveness"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Self-respect Effectiveness"
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Reduce Vulnerability"
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Build MASTERY"
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Build positive experiences"
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Opposite-to-emotion action"
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Distract"
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Self-soothe"
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Improve the moment"
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Pros and cons"
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Radical Acceptance"
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Work"
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Love"
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Time"
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Place"
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Take nothing personally"
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Always do your best"
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Don't make assumptions"
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "diary.usedskills", 
+    "fields": {
+      "description": "Be impeccable with your word"
+    }
+  }
+]

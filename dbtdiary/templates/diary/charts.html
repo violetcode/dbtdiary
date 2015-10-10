@@ -1,0 +1,195 @@
+{% if diaries %}
+    <h3 class="heading">Used Skills</h3>
+    <div id="skills_chart"></div>
+    <h3 class="heading">Urges</h3>
+    {% if desktop %}
+    <div id='mobile_urge_chart' class="hidden"></div>
+    <div id='urge_chart' style='width: 900px; height: 300px;'></div> 
+    {% else %}
+    <div id='mobile_urge_chart' class="hidden-desktop"></div>
+    <div id='urge_chart' style='width: 900px; height: 300px;' class="visible-desktop"></div> 
+    {% endif %}
+    <h3 class="heading">Mood</h3>
+    {% if desktop %}
+    <div id="mobile_mood_chart" class="hidden"></div>
+    <div id="mood_chart" sytle='width: 900px; height: 300px;'></div>
+    {% else %}
+    <div id="mobile_mood_chart" class="hidden-desktop"></div>
+    <div id="mood_chart" sytle='width: 900px; height: 300px;' class="visible-desktop"></div>
+    {% endif %}
+    <h3 class="heading">Emotions</h3>
+    <h4 class="heading">Negative Emotions</h4>
+    {% if desktop %}
+    <ul class="nav nav-tabs" id="neg_emotion_tabs">
+    {% else %}
+    <ul class="nav nav-tabs visible-desktop" id="neg_emotion_tabs">
+    {% endif %}
+        <li><a href="#all" data-toggle="tab">All</a></li>
+        <li><a href="#pain" data-toggle="tab" id="pain-tab">Pain</a></li>
+        <li><a href="#sadness" data-toggle="tab" id="sad-tab">Sadness</a></li>
+        <li><a href="#shame" data-toggle="tab" id="shame-tab">Shame</a></li>
+        <li><a href="#anger" data-toggle="tab" id="anger-tab">Anger</a></li>
+        <li><a href="#fear" data-toggle="tab" id="fear-tab">Fear</a></li>
+        <li><a href="#disgust" data-toggle="tab" id="disgust-tab">Disgust</a></li>
+        <li><a href="#jealousy" data-toggle="tab" id="jealousy-tab">Jealousy</a></li>
+        <li><a href="#guilt" data-toggle="tab" id="guilt-tab">Guilt</a></li>
+        <li><a href="#agitation" data-toggle="tab" id="agitation-tab">Agitation</a></li>
+    </ul>
+    {% if desktop %}
+    <div class="tab-content">
+        <div class="tab-pane active" id="all">
+            <div id='mobile_emotion_chart' class="hidden"></div>
+            <div id='emotion_chart'></div>
+        </div>
+        <div class="tab-pane" id="pain">
+            <div id='pain_chart'></div>
+        </div>
+        <div class="tab-pane" id="sadness">
+            <div id='sad_chart'></div>
+        </div>
+        <div class="tab-pane" id="shame">
+            <div id='shame_chart'></div>
+        </div>
+        <div class="tab-pane" id="anger">
+            <div id='anger_chart'></div>
+        </div>
+        <div class="tab-pane" id="fear">
+            <div id='fear_chart'></div>
+        </div>
+        <div class="tab-pane" id="disgust">
+            <div id='disgust_chart'></div>
+        </div>
+        <div class="tab-pane" id="jealousy">
+            <div id='jealousy_chart'></div>
+        </div>
+        <div class="tab-pane" id="guilt">
+            <div id='guilt_chart'></div>
+        </div>
+        <div class="tab-pane" id="agitation">
+            <div id='agitation_chart'></div>
+        </div>
+    </div>
+    {% else %}
+    <div class="tab-content">
+        <div class="tab-pane active" id="all">
+            <div id='mobile_emotion_chart' class="hidden-desktop"></div>
+            <div id='emotion_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="pain">
+            <div id='pain_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="sadness">
+            <div id='sad_chart'class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="shame">
+            <div id='shame_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="anger">
+            <div id='anger_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="fear">
+            <div id='fear_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="disgust">
+            <div id='disgust_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="jealousy">
+            <div id='jealousy_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="guilt">
+            <div id='guilt_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="agitation">
+            <div id='agitation_chart' class="visible-desktop"></div>
+        </div>
+    </div>
+    {% endif %}
+    <h4 class="heading">Positive Emotions</h4>
+    {% if desktop %}
+    <ul class="nav nav-tabs" id="pos_emotion_tabs">
+    {% else %}
+    <ul class="nav nav-tabs visible-desktop" id="pos_emotion_tabs">
+    {% endif %}
+        <li><a href="#pos_all" data-toggle="tab">All</a></li>
+        <li><a href="#joy" data-toggle="tab" id="joy-tab">Joy</a></li>
+        <li><a href="#happy" data-toggle="tab" id="happy-tab">Happiness</a></li>
+        <li><a href="#content" data-toggle="tab" id="content-tab">Contentment</a></li>
+        <li><a href="#calm" data-toggle="tab" id="calm-tab">Calm</a></li>
+        <li><a href="#grateful" data-toggle="tab" id="grateful-tab">Grateful</a></li>
+        <li><a href="#excitement" data-toggle="tab" id="excitement-tab">Excitement</a></li>
+        <li><a href="#optimism" data-toggle="tab" id="optimism-tab">Optimism</a></li>
+        <li><a href="#hope" data-toggle="tab" id="hope-tab">Hope</a></li>
+        <li><a href="#confidence" data-toggle="tab" id="confidence-tab">Confidence</a></li>
+    </ul>
+    {% if desktop %}
+    <div class="tab-content">
+        <div class="tab-pane active" id="pos_all">
+            <div id='mobile_pos_emotion_chart' class="hidden"></div>
+            <div id='pos_emotion_chart'></div>
+        </div>
+        <div class="tab-pane" id="joy">
+            <div id='joy_chart'></div>
+        </div>
+        <div class="tab-pane" id="happy">
+            <div id='happy_chart'></div>
+        </div>
+        <div class="tab-pane" id="content">
+            <div id='content_chart'></div>
+        </div>
+        <div class="tab-pane" id="calm">
+            <div id='calm_chart'></div>
+        </div>
+        <div class="tab-pane" id="grateful">
+            <div id='grateful_chart'></div>
+        </div>
+        <div class="tab-pane" id="excitement">
+            <div id='excitement_chart'></div>
+        </div>
+        <div class="tab-pane" id="optimism">
+            <div id='optimism_chart'></div>
+        </div>
+        <div class="tab-pane" id="hope">
+            <div id='hope_chart'></div>
+        </div>
+        <div class="tab-pane" id="confidence">
+            <div id='confidence_chart'></div>
+        </div>
+    </div>
+    {% else %}
+    <div class="tab-content">
+        <div class="tab-pane active" id="pos_all">
+            <div id='mobile_pos_emotion_chart' class="hidden-desktop"></div>
+            <div id='pos_emotion_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="joy">
+            <div id='joy_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="happy">
+            <div id='happy_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="content">
+            <div id='content_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="calm">
+            <div id='calm_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="grateful">
+            <div id='grateful_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="excitement">
+            <div id='excitement_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="optimism">
+            <div id='optimism_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="hope">
+            <div id='hope_chart' class="visible-desktop"></div>
+        </div>
+        <div class="tab-pane" id="confidence">
+            <div id='confidence_chart' class="visible-desktop"></div>
+        </div>
+    </div>
+    {% endif %}
+    {% else %}
+    <p>No diaries to display!</p>
+    {% endif %}

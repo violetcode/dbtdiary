@@ -1,0 +1,255 @@
+/* @override 
+	http://dbtdiary.herokuapp.com/static/css/screen.css
+	http://dbtdiary.com/static/css/screen.css
+*/
+
+body {
+	font-family: "helvetica neue", helvetica, arial, geneva, sans-serif;
+	background: #FFF url('../img/paper.png');
+	text-shadow: 0 1px 1px #FFF;
+}
+
+a {
+	color: #666;
+}
+
+td a { 
+	display: block; 
+	width: 100%; 
+	height: 100%; 
+}
+
+td a:hover {
+	text-decoration: none;
+}
+
+.rotate180{
+	-webkit-transform: rotate(180deg) matrix(1, 0, 0, -1, 0, 0);
+	-moz-transform: rotate(180deg) matrix(1, 0, 0, -1, 0, 0);
+	margin: 0px 0px 0px 0px;
+}
+
+.navbar-inner i {
+	opacity: .5;
+}
+
+.navbar-inner li:hover i {
+	opacity: 1;
+}
+
+
+.form-horizontal h3 {
+	font-weight: normal;
+	font-family: "skolar",serif;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+	font-size: 16px;
+	height: auto;
+	margin-bottom: 15px;
+	padding: 7px 9px;
+}
+
+.fieldWrapper ul {
+	margin: 0;
+	list-style-type: none;
+}
+
+.fieldWrapper ul label {
+	padding-top: 2px;
+	vertical-align: middle;
+}
+
+.well .radio {
+	margin-right: 40px;
+}
+
+.fieldWrapper ul input[type="radio"],
+.fieldWrapper ul input[type="checkbox"] {
+	float: left;
+	margin-right: 10px;
+}
+
+#ccWrapper {
+	margin: 20px 5px;
+}
+
+
+#ccWrapper input[type="checkbox"] {
+	float: left;
+	margin-right: 10px;
+}
+
+#skillsWrapper,
+#lyingWrapper {
+	margin-top: 25px;
+}
+
+div#emotions .fieldWrapper,
+div#urges .fieldWrapper {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.fieldWrapper label.heading {
+	font-weight: bold;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin-top: 15px;
+}
+
+h3.heading {
+	text-align: center;
+	font-weight: normal;
+	font-family: "skolar",serif;
+}
+
+h2.heading {
+	font-weight: 300;
+	color: #777;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 20px;
+	font-family: "skolar",serif;
+}
+
+.hero-unit {
+	text-align: center;
+	background: none;
+}
+
+.hero-unit h1 {
+	font-family: "felt-tip-roman",sans-serif;
+	margin-bottom: 10px;
+}
+
+.hero-unit p {
+	font-size: 28px;
+	line-height: 38px;
+	font-family: "skolar",serif;
+}
+
+#masthead .navbar-inner {
+	background: #333;
+}
+
+#masthead .navbar-inner .active {
+	background-color: none;
+}
+
+#masthead .brand {
+	color: #f2f2f2;
+	font-family: "felt-tip-roman",sans-serif;
+	font-size: 20px;
+}
+
+#masthead .nav > li > a {
+	color: #999;
+}
+
+#masthead .nav > li > a:hover {
+	color: #f2f2f2;
+	text-decoration: none;
+}
+
+ul.progress-wrapper {
+	display: block;
+	clear: both;
+	height: 20px;
+	margin-top: -10px;
+}
+
+ul.progress-wrapper li:last-child {
+	width: 0;
+}
+
+li.progress-bar {
+	text-align: left;
+	display: block;
+	float: left;
+	width: 20%;
+}
+
+#id_notes {
+	height: 100px;
+}
+
+#emotion_chart, #urge_chart, #mood_chart{
+	margin: 10px;
+}
+
+#content-related {
+	margin-top: 10px;
+}
+
+ul.thumbnails li.span4{
+	background: #fff;
+}
+
+div.thumbnail {
+	min-height: 410px;
+}
+
+div.thumbnail h3 {
+	text-align: center;
+	font-family: "skolar",serif;
+}
+
+div.thumbnail div.caption a {
+	font-weight: bold;
+	color: #000;
+}
+
+footer {
+	margin-top: 20px;
+	padding: 20px 0;
+	border-top: 1px solid #ccc;
+}
+
+footer .nav-pills a {
+	font-weight: bold;
+}
+
+footer .nav-pills a:hover {
+	background: none;
+}
+
+footer p, footer small {
+	margin-left: 12px;
+}
+
+div.tab-pane div, #mood_chart{
+	width: 900px;
+	height: 300px;
+	overflow: hidden;
+}
+
+.progress-danger {
+	margin-left: 30px;
+}
+
+.hidden {
+	display: none;
+}
+
+@media (min-width: 768px) {
+	#wrapper {
+	margin-top: 75px;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero-unit {
+		padding: 0;
+	}
+
+	.well .radio {
+		margin-right: 0px;
+	}
+}

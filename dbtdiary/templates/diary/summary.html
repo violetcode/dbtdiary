@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+    {% include "diary/charts_js.html" %} 
+
+{% endblock %}
+
+{% block content %}   
+    <h2 class="heading">Past Week's Summary</h2>
+    {% if not desktop %}
+    <div class="btn hidden-desktop"><a href="/summary?type=desktop">View Desktop Version</a></div>
+    {% endif %}
+    {% if diaries %}
+    {% if desktop %}
+    <table class="table table-bordered table-condensed">
+    {% else %}
+    <table class="table table-bordered table-condensed visible-desktop">
+    {% endif %}
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Urge Suicide</th>
+                <th>Urge Self Harm</th>
+                <th>Pain</th>
+                <th>Sadness</th>
+                <th>Shame</th>
+                <th>Anger</th>
+                <th>Fear</th>
+                <th>Disgust</th>
+                <th>Jealousy</th>
+                <th>Guilt</th>
+                <th>Agitation</th>
+                <th>Joy</th>
+                <th>Happiness</th>
+                <th>Contentment</th>
+                <th>Calm</th>
+                <th>Grateful</th>
+                <th>Excitement</th>
+                <th>Optimism</th>
+                <th>Hope</th>
+                <th>Confidence</th>
+                <th>Lies</th>
+                <th>Self Harm</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for diary in reverse %}
+            <tr>
+                <td>{{diary.time|date:"SHORT_DATETIME_FORMAT"}}</td>
+                <td>{{diary.urge_suicide}}</td>
+                <td>{{diary.urge_sh}}</td>
+                <td>{{diary.pain}}</td>
+                <td>{{diary.sad}}</td>
+                <td>{{diary.shame}}</td>
+                <td>{{diary.anger}}</td>
+                <td>{{diary.fear}}</td>
+                <td>{{diary.disgust}}</td>
+                <td>{{diary.jealousy}}</td>
+                <td>{{diary.guilt}}</td>
+                <td>{{diary.agitation}}</td> 
+                <td>{{diary.joy}}</td>
+                <td>{{diary.happy}}</td>
+                <td>{{diary.content}}</td>
+                <td>{{diary.calm}}</td>
+                <td>{{diary.grateful}}</td>
+                <td>{{diary.excitement}}</td>
+                <td>{{diary.optimism}}</td>
+                <td>{{diary.hope}}</td>
+                <td>{{diary.confidence}}</td>
+                <td>{{diary.lying}}</td>
+                <td>{{diary.action_sh|yesno:"yes,no"}}</td>
+                <td>{{diary.notes}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+    {% endif %}
+    {% include "diary/charts.html" %}
+    
+    
+{% endblock %}

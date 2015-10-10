@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+		<p>Already logged in. Logout first.</p>
+	{% else %}
+	<h2 class="heading">Login</h2>
+	<div class="row">
+	<div class="span6">
+	
+	<div class="well">
+	<form class="form-horizontal" method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
+	
+	{% for field in form %}
+	    <div class="control-group{% if field.errors %} error{% endif %}">
+	        <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+	        <div class="controls">
+	            {{ field }}
+	            {% if field.errors %}
+	                <span class="help-inline">
+	                    {% if field.errors %}
+	                        {% for error in field.errors %}
+	                            {{ error|escape }}
+	                        {% endfor %}
+	                    {% endif %}
+	                </span>
+	            {% endif %}
+	        </div>
+	    </div>
+	{% endfor %}	
+	
+	<div class="control-group">
+	    <div class="controls">
+			<button class="btn btn-primary" type="submit">Sign in</button>
+			<input type="hidden" name="next" value="{{ next }}" />
+		</div>
+	</div>
+	
+	</form>
+	</div><!-- well -->
+	</div><!-- span6 -->
+	
+	<div class="span4">
+		<div id="content-related" class="sidebar">
+			<p><a href="{% url auth_password_reset %}">Forgot</a> your password?</p>
+			<p><a href="{% url registration_register %}">Need an account</a>?</p>
+		</div><!-- END #content-related -->
+	</div><!-- span4 -->
+	</div><!-- row -->
+
+	{% endif %}
+	{% endblock %}

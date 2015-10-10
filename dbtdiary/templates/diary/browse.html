@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="heading">Previous Diaries</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Weekday</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for diary in diaries %}
+        <tr>
+            <td><a href="/diary/{{diary.id}}">{{diary.time|date:"l"}}</a></td>
+            <td><a href="/diary/{{diary.id}}">{{diary.time|date:"F jS, Y"}}</a></td>
+            <td><a href="/diary/{{diary.id}}">{{diary.time|date:"g:i a"}}</a></td>
+            <td><a href="/edit/{{diary.id}}"><i class="icon-edit"></i></a></td>
+            <td><a href="/delete/{{diary.id}}"><i class="icon-trash"></i></a></td>
+        </tr>
+    {% empty %}
+        <tr><td>No previous diaries. You should <a href="/submit">fill one out</a>?</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination row-fluid">
+    <div class="span4">
+        {% if diaries.has_previous %}
+            <a href="?page={{ diaries.previous_page_number }}">Earlier Diaries</a>
+        {% endif %}
+    </div>
+    <div class="span4">
+        <span class="current">
+            Page {{ diaries.number }} of {{ diaries.paginator.num_pages }}.
+        </span>
+    </div>
+    <div class="span4">
+        {% if diaries.has_next %}
+            <a href="?page={{ diaries.next_page_number }}">Older Diaries</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

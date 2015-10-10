@@ -1,0 +1,500 @@
+{% spaceless %}
+{% if diaries %}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      var options = {
+        displayAnnotations: false,
+        displayZoomButtons: false, 
+        displayRangeSelector: false, 
+        backgroundColor: { fill: 'none'},
+        max: 5,
+      }
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        {% if skills %}
+        var skills_data = google.visualization.arrayToDataTable([
+          ['Skill', 'Times Used'],
+          {% for skill, count in skills.items %}
+          ['{{skill|escapejs}}', {{count}}],
+          {% endfor %}
+        ]);
+
+        var skill_options = {
+          height: 400,
+          backgroundColor: { fill: 'none'},
+        };
+
+        var skills_chart = new google.visualization.PieChart(document.getElementById('skills_chart'));
+        skills_chart.draw(skills_data, skill_options);
+        {% endif %}
+
+      }
+      google.load('visualization', '1', {'packages':['annotatedtimeline']});
+      google.setOnLoadCallback(drawTimeline);
+      function drawTimeline() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Suicide');
+        data.addColumn('number', 'Self Harm');
+        data.addColumn('string', 'Did Self Harm');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), {{diary.urge_suicide}}, 
+            {{diary.urge_sh}}, 
+                {% if diary.action_sh %} 
+                'Self Harmed' 
+                {% else %} 
+                undefined 
+                {% endif %}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('urge_chart'));
+        chart.draw(data, {displayAnnotations: true,
+            displayZoomButtons: false, 
+            displayRangeSelector: false, 
+            backgroundColor: { fill: 'none'},
+            max: 5});
+
+        var mood_data = new google.visualization.DataTable();
+        mood_data.addColumn('date', 'Date');
+        mood_data.addColumn('number', 'Mood');
+        mood_data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), {{diary.mood}}],
+            {% endfor %}
+        ]);
+
+        var mood_chart = new google.visualization.AnnotatedTimeLine(document.getElementById('mood_chart'));
+        mood_chart.draw(mood_data, {displayAnnotations: false,
+            displayZoomButtons: false, 
+            displayRangeSelector: false, 
+            backgroundColor: { fill: 'none'},
+            max: 9,
+            min: -9});
+
+        var emotion_data = new google.visualization.DataTable();
+        emotion_data.addColumn('date', 'Date');
+        emotion_data.addColumn('number', 'Pain');
+        emotion_data.addColumn('number', 'Sad');
+        emotion_data.addColumn('number', 'Shame');
+        emotion_data.addColumn('number', 'Anger');
+        emotion_data.addColumn('number', 'Fear');
+        emotion_data.addColumn('number', 'Disgust');
+        emotion_data.addColumn('number', 'Jealousy');
+        emotion_data.addColumn('number', 'Guilt');
+        emotion_data.addColumn('number', 'Agitation');
+        emotion_data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.pain}},
+            {{diary.sad}},
+            {{diary.shame}},
+            {{diary.anger}},
+            {{diary.fear}},
+            {{diary.disgust}},
+            {{diary.jealousy}},
+            {{diary.guilt}},
+            {{diary.agitation}}],
+            {% endfor %}
+        ]);
+
+        
+
+        var emotion_chart = new google.visualization.AnnotatedTimeLine(document.getElementById('emotion_chart'));
+        emotion_chart.draw(emotion_data, options);
+
+        var pos_emotion_data = new google.visualization.DataTable();
+        pos_emotion_data.addColumn('date', 'Date');
+        pos_emotion_data.addColumn('number', 'Joy');
+        pos_emotion_data.addColumn('number', 'Happiness');
+        pos_emotion_data.addColumn('number', 'Contentment');
+        pos_emotion_data.addColumn('number', 'Calm');
+        pos_emotion_data.addColumn('number', 'Grateful');
+        pos_emotion_data.addColumn('number', 'Excitement');
+        pos_emotion_data.addColumn('number', 'Optimism');
+        pos_emotion_data.addColumn('number', 'Hope');
+        pos_emotion_data.addColumn('number', 'Confidence');
+        pos_emotion_data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.joy}},
+            {{diary.happy}},
+            {{diary.content}},
+            {{diary.calm}},
+            {{diary.grateful}},
+            {{diary.excitement}},
+            {{diary.optimism}},
+            {{diary.hope}},
+            {{diary.confidence}}],
+            {% endfor %}
+        ]);
+
+        
+
+        var pos_emotion_chart = new google.visualization.AnnotatedTimeLine(document.getElementById('pos_emotion_chart'));
+        pos_emotion_chart.draw(pos_emotion_data, options);
+
+      }
+
+      
+
+      google.setOnLoadCallback(drawPhoneCharts);
+      function drawPhoneCharts() {
+        var urge_data = google.visualization.arrayToDataTable([
+          ['Date', 'Suicide', 'Self Harm'],
+          {% for diary in diaries %}
+          ['{{diary.time|date:"SHORT_DATETIME_FORMAT"}}', {{diary.urge_suicide}}, 
+            {{diary.urge_sh}}], 
+          {% endfor %}
+        ]);
+
+        var urge_options = {
+            vAxis: {
+                baseline : 0,
+                viewWindowMode: 'maximized',
+                maxValue: 5,
+                minValue: 0,
+                backgroundColor: { fill: 'none'},
+            }
+
+        }
+
+        var urge_chart = new google.visualization.LineChart(document.getElementById('mobile_urge_chart'));
+        urge_chart.draw(urge_data, urge_options);
+
+        var mood_data = google.visualization.arrayToDataTable([
+          ['Date', 'Mood'],
+          {% for diary in diaries %}
+          ['{{diary.time|date:"SHORT_DATETIME_FORMAT"}}', {{diary.mood}}], 
+          {% endfor %}
+        ]);
+
+        var mood_options = {
+            vAxis: {
+                baseline : -9,
+                viewWindowMode: 'maximized',
+                maxValue: 9,
+                minValue: -9,
+                backgroundColor: { fill: 'none'},
+            }
+
+        }
+
+        var mood_chart = new google.visualization.LineChart(document.getElementById('mobile_mood_chart'));
+        mood_chart.draw(mood_data, mood_options);
+
+
+        var emotion_data = google.visualization.arrayToDataTable([
+          ['Date', 'Pain', 'Sadness', 'Shame', 'Anger', 'Fear', 'Disgust', 'Jealousy', 'Guilt', 'Agitation'],
+          {% for diary in diaries %}
+          ['{{diary.time|date:"SHORT_DATETIME_FORMAT"}}',
+            {{diary.pain}},
+            {{diary.sad}},
+            {{diary.shame}},
+            {{diary.anger}},
+            {{diary.fear}},
+            {{diary.disgust}},
+            {{diary.jealousy}},
+            {{diary.guilt}},
+            {{diary.agitation}}],
+          {% endfor %}
+        ]);
+
+        var emotion_options = {
+            vAxis: {
+                baseline : 0,
+                viewWindowMode: 'maximized',
+                maxValue: 5,
+                minValue: 0,
+                backgroundColor: { fill: 'none'},
+            }
+
+        }
+
+        var emotion_chart = new google.visualization.LineChart(document.getElementById('mobile_emotion_chart'));
+        emotion_chart.draw(emotion_data, emotion_options);
+
+        var pos_emotion_data = google.visualization.arrayToDataTable([
+          ['Date', 'Joy', 'Happiness', 'Contentment', 'Calm', 'Grateful', 'Excitement', 'Optimism', 'Hope', 'Confidence'],
+          {% for diary in diaries %}
+          ['{{diary.time|date:"SHORT_DATETIME_FORMAT"}}',
+            {{diary.joy}},
+            {{diary.happy}},
+            {{diary.content}},
+            {{diary.calm}},
+            {{diary.grateful}},
+            {{diary.excitement}},
+            {{diary.optimism}},
+            {{diary.hope}},
+            {{diary.confidence}}],
+          {% endfor %}
+        ]);
+
+        var pos_emotion_chart = new google.visualization.LineChart(document.getElementById('mobile_pos_emotion_chart'));
+        pos_emotion_chart.draw(pos_emotion_data, emotion_options);
+      }
+$(function(){
+    $('#emotion_tabs a:first').tab('show');
+    $('#pain-tab').on('shown', function(e){
+        var pain_data = new google.visualization.DataTable();
+        pain_data.addColumn('date', 'Date');
+        pain_data.addColumn('number', 'Pain');
+        pain_data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.pain}}],
+            {% endfor %}
+        ]);
+
+        var pain_chart = new google.visualization.AnnotatedTimeLine(document.getElementById('pain_chart'));
+        pain_chart.draw(pain_data, options);
+    });
+    $('#sad-tab').on('shown', function(e){
+        var sad_data = new google.visualization.DataTable();
+        sad_data.addColumn('date', 'Date');
+        sad_data.addColumn('number', 'Sadness');
+        sad_data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.sad}}],
+            {% endfor %}
+        ]);
+
+        var sad_chart = new google.visualization.AnnotatedTimeLine(document.getElementById('sad_chart'));
+        sad_chart.draw(sad_data, options);
+    });
+    $('#shame-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Shame');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.shame}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('shame_chart'));
+        chart.draw(data, options);
+    });
+
+    $('#anger-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Anger');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.anger}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('anger_chart'));
+        chart.draw(data, options);
+    });
+
+    $('#fear-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Fear');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.fear}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('fear_chart'));
+        chart.draw(data, options);
+    });
+
+    $('#disgust-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Disgust');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.disgust}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('disgust_chart'));
+        chart.draw(data, options);
+    });
+
+    $('#jealousy-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Jealousy');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.jealousy}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('jealousy_chart'));
+        chart.draw(data, options);
+    });
+    
+    $('#agitation-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Agitation');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.agitation}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('agitation_chart'));
+        chart.draw(data, options);
+    });
+    $('#joy-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Joy');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.joy}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('joy_chart'));
+        chart.draw(data, options);
+    });
+    $('#guilt-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Guilt');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.guilt}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('guilt_chart'));
+        chart.draw(data, options);
+    });
+    $('#happy-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Happiness');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.happy}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('happy_chart'));
+        chart.draw(data, options);
+    });
+    $('#content-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Contentment');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.content}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('content_chart'));
+        chart.draw(data, options);
+    });
+    $('#calm-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Calm');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.calm}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('calm_chart'));
+        chart.draw(data, options);
+    });
+    $('#grateful-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Grateful');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.grateful}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('grateful_chart'));
+        chart.draw(data, options);
+    });
+    $('#excitement-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Excitement');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.excitement}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('excitement_chart'));
+        chart.draw(data, options);
+    });
+    $('#optimism-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Optimism');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.optimism}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('optimism_chart'));
+        chart.draw(data, options);
+    });
+    $('#hope-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Hope');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.hope}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('hope_chart'));
+        chart.draw(data, options);
+    });
+    $('#confidence-tab').on('shown', function(e){
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Confidence');
+        data.addRows([
+            {% for diary in diaries %}
+          [new Date('{{diary.time|date:"r"}}'), 
+            {{diary.confidence}}],
+            {% endfor %}
+        ]);
+
+        var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('confidence_chart'));
+        chart.draw(data, options);
+    });
+});
+    </script>
+    {% endif %}
+{% endspaceless %}
